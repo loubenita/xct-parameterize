@@ -30,8 +30,8 @@ Swift 5.9 or later
 
 #### Swift Package Manager
 
-1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
-2. Add `https://github.com/Boowman/xct-parameterize.git`
+1. In Xcode, navigate to the menu: File > Swift Packages > Add Package Dependency
+2. Add `https://github.com/loubenita/xct-parameterize.git`
 3. For the Dependency Rule, Select "Up to Next Major" with `1.0.0`. Click Add Package.
 4. Under `Package Product` look for XCTParameterize and under `Target` select your test target.
 5. Click Add Package.
@@ -47,7 +47,7 @@ Swift 5.9 or later
 ``` swift
     dependencies: [
         ...
-      .package(url: "https://github.com/Boowman/xct-parameterize", branch: "1.0.0")
+      .package(url: "https://github.com/loubenita/xct-parameterize.git", branch: "1.0.0")
     ]
 ```
 
@@ -65,7 +65,7 @@ Swift 5.9 or later
 
 ## Examples [Reason why we need it]
 
-- Let's say you would like to concatanate some strings and you would like to test the outcomes.
+- Let's say you would like to concatenate some strings and you would like to test the outcomes.
 ```swift
 public class StringUtils {
 
@@ -76,7 +76,7 @@ public class StringUtils {
 }
 ```
 
-- Traditionaly in order to `UnitTest` the above with multiple provided strings it would look something like the below.  It tests, it's readable and more importantly it passes, but the main problem here is if you need to write multiple checks, now image the same thing but for different `Util` classes and so on. You can image how much code will end up being duplicated.
+- Traditionally to `UnitTest` the above with multiple provided strings it would look something like the below.  It tests, it's readable and more importantly it passes, but the main problem here is if you need to write multiple checks, now image the same thing but for different `Util` classes and so on. You can imagine how much code will end up being duplicated.
 ```swift
     func testHellWorld() throws {
         // Arrange
@@ -172,7 +172,7 @@ public class StringUtilsTests: XCTestCase {
 }
 ```
 
-- The above will result in the follow macros being created
+- The above will result in the following macros being created
 ```swift
     func testConcatenate_Test_Test() throws {
         let a: String = ""
@@ -221,7 +221,7 @@ public class StringUtilsTests: XCTestCase {
     }
 }
 ```
-- The above will result in the follow macro being created
+- The above will result in the following macro being created
 ```swift
     func testConcatenate_Verify_HelloWorld() throws {
         let a: String = "Hello"
