@@ -28,6 +28,25 @@ final class XCTParametersTests: XCTBaseTests {
             macros: xctParameteriseMacros
         )
     }
+    
+    func testInlineDataSingleParameterNil() throws {
+        assertMacroExpansion(
+            """
+            
+            @InlineData(nil)
+            func testingMethod(value: String?) { }
+            
+            """,
+            expandedSource: """
+            func testingMethod(value: String?) { }
+            
+            func testingMethod_nil() {
+                let value: String? = nil
+            }
+            """,
+            macros: xctParameteriseMacros
+        )
+    }
 
     func testInlineDataTwoParameters() throws {
         assertMacroExpansion(

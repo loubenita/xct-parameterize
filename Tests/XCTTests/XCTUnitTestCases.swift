@@ -18,6 +18,11 @@ final class XCTTestCases: XCTestCase {
         XCTAssertEqual(url.url?.absoluteString, value.first)
     }
     
+    @InlineData(nil)
+    func testNilValue(value: String?) throws {
+        XCTAssertNil(value)
+    }
+    
     @InlineData(["www.github.com"], label: "_verifyURL")
     func testValue(value: [String]) throws {
         let url = URLRequest(url: URL(string: "www.github.com")!)
