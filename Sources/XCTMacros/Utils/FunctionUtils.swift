@@ -81,6 +81,20 @@ internal extension FunctionUtils {
     }
 }
 
+// MARK: Function Attribute
+internal extension FunctionUtils {
+    static func getAttribute(_ function: FunctionDeclSyntax?) -> String? {
+        let attributeList = AttributeListSyntax(function?.attributes)
+        let attribute = AttributeSyntax(attributeList?.last)
+        
+        if attribute?.attributeName.trimmedDescription != "InlineData" {
+            return attribute?.trimmedDescription
+        } else {
+            return ""
+        }
+    }
+}
+
 // MARK: Macro Parameters
 internal extension FunctionUtils {
     static func getMacroParameters(_ function: FunctionDeclSyntax?) -> [[ParameterProtocol]] {

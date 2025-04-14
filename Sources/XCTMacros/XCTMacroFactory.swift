@@ -21,11 +21,13 @@ internal final class XCTMacroFactory {
     func build() throws -> [DeclSyntax] {
         let macroParameters = MacroUtils.getParameters(node)
         let functionParameters = FunctionUtils.getParameters(functionDeclaration)
+        let attribute = FunctionUtils.getAttribute(functionDeclaration)
         
         let functionSuffix = node.getLabelValue() ?? "_\(MacroUtils.getFunctionSuffix(macroParameters))"
         let returnType = FunctionUtils.getReturn(functionDeclaration)
 
         let result = """
+        \(attribute ?? "")
         func \(functionDeclaration.name.text)\(functionSuffix)()\(returnType) {
             \(getFunctionAndAppendParameters(macroParameters: macroParameters, functionParameters: functionParameters))
         }

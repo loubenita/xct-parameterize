@@ -18,7 +18,7 @@ final class XCTTestCases: XCTestCase {
         XCTAssertEqual(url.url?.absoluteString, value.first)
     }
     
-    @InlineData(["www.github.com"], label: "_VerifyURL")
+    @InlineData(["www.github.com"], label: "_verifyURL")
     func testValue(value: [String]) throws {
         let url = URLRequest(url: URL(string: "www.github.com")!)
         
@@ -26,10 +26,18 @@ final class XCTTestCases: XCTestCase {
     }
     
     @InlineData(["www.github.com"])
-    @InlineData(["www.github.com"], label: "_VerifyURL")
+    @InlineData(["www.github.com"], label: "_verifyURL")
     func testCombined(value: [String]) throws {
         let url = URLRequest(url: URL(string: "www.github.com")!)
         
         XCTAssertEqual(url.url?.absoluteString, value.first)
+    }
+    
+    @InlineData("www.github.com", label: "_attributeCheck")
+    @MainActor
+    func testAttribute(value: String) throws {
+        let url = URLRequest(url: URL(string: "www.github.com")!)
+        
+        XCTAssertEqual(url.url?.absoluteString, value)
     }
 }
