@@ -9,7 +9,7 @@ import XCTest
 import Foundation
 import XCTParameterize
 
-final class XCTTestCases: XCTestCase {
+final class XCTUnitTestCases: XCTestCase {
     
     @InlineData(["www.github.com"])
     func testURLValue(value: [String]) throws {
@@ -36,6 +36,11 @@ final class XCTTestCases: XCTestCase {
         let url = URLRequest(url: URL(string: "www.github.com")!)
         
         XCTAssertEqual(url.url?.absoluteString, value.first)
+    }
+    
+    @InlineData(1745677800, Date.from(year: 2025, month: 4, day: 26, hour: 14, minute: 30))
+    func testMultipleParams(timeIntervalSince1970: Int, date: Date?) throws {
+        XCTAssertEqual(timeIntervalSince1970, Int(date!.timeIntervalSince1970))
     }
     
     @InlineData("www.github.com", label: "_attributeCheck")
