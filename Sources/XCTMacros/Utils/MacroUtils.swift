@@ -63,6 +63,19 @@ internal extension MacroUtils {
         return MacroParameter(type: type.baseName.text, value: value)
     }
     
+    func getMemberFunctionExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
+        let function = FunctionCallExprSyntax(label?.expression)
+        let member = MemberAccessExprSyntax(function?.calledExpression)
+        let type = DeclReferenceExprSyntax(member?.base)
+        let value = function?.trimmedDescription
+        
+        guard let type = type, let value = value else {
+            return nil
+        }
+        
+        return MacroParameter(type: type.baseName.text, value: value)
+    }
+    
     func getStringExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
         guard let string = StringLiteralExprSyntax(label?.expression) else {
             return nil
@@ -160,6 +173,9 @@ internal extension MacroUtils {
                 return value
             }
             if let value = MacroUtils().getFunctionExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getMemberFunctionExpression(prm) {
                 return value
             }
             if let value = MacroUtils().getForceUnwrapExpression(prm) {

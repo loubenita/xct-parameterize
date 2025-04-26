@@ -104,4 +104,30 @@ final class XCTDifferentTypeTests: XCTBaseTests {
             macros: xctParameteriseMacros
         )
     }
+    
+    func testInlineDataMacroMemberFunction() throws {
+        assertMacroExpansion(
+            """
+            
+            @InlineData("www.github.com", Date.from(year: 2025, month: 4, day: 26, hour: 14, minute: 30))
+            func testMultipleParams(value: String, date: Date?) throws {
+                let url = URLRequest(url: URL(string: value)!)
+            }
+            
+            """,
+            expandedSource: """
+            func testMultipleParams(value: String, date: Date?) throws {
+                let url = URLRequest(url: URL(string: value)!)
+            }
+
+            func testMultipleParams_www_github_com_Date_from_year_2025_month_4_day_26_hour_14_minute_30() throws {
+                let value: String = "www.github.com"
+                let date: Date? = Date.from(year: 2025, month: 4, day: 26, hour: 14, minute: 30)
+            
+                let url = URLRequest(url: URL(string: value)!)
+            }
+            """,
+            macros: xctParameteriseMacros
+        )
+    }
 }
