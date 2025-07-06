@@ -1,3 +1,5 @@
+# Archived because of the introduction of SwiftTesting
+
 # XCTParameterize
 
 <div>
